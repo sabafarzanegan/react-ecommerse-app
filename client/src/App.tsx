@@ -1,3 +1,4 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import AuthLayout from "./components/auth/Layout";
 import Register from "./page/auth/Register";

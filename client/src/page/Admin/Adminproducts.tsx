@@ -1,5 +1,11 @@
+import Addproduct from "../../components/Admin/products/Addproduct";
+
 function Adminproducts() {
-  return <div>Adminproducts</div>;
+  return (
+    <div>
+      <Addproduct />
+    </div>
+  );
 }
 
 export default Adminproducts;
