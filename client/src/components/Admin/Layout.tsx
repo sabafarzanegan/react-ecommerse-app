@@ -9,7 +9,7 @@ import {
 import type { MenuProps } from "antd";
 import { Button, Flex, Layout, Menu, theme } from "antd";
 import { Link, Outlet } from "react-router-dom";
-import { Authstore } from "../../store/Authstore";
+import { Authstore } from "../../store/admin/Authstore";
 import { Typography } from "antd";
 
 const { Header, Content, Footer, Sider } = Layout;

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ReactNode } from "react";
-import { Authstore } from "../../store/Authstore";
+import { Authstore } from "../../store/admin/Authstore";
 import { Navigate, useLocation } from "react-router-dom";
+import { ShopCart } from "../../store/user/ShopCart";
 
 function AuthProvider({ children }: { children?: ReactNode }) {
   const { user, isAuthenticated } = Authstore((state) => state);

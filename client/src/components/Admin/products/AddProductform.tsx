@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Button,
   Form,
@@ -15,7 +14,7 @@ import {
   UploadOutlined,
 } from "@ant-design/icons";
 import { useState } from "react";
-import { Productstore } from "../../../store/Productstore";
+import { Productstore } from "../../../store/admin/Productstore";
 import { UploadImageInSupabase } from "../../../utils/supabase";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
@@ -41,6 +40,7 @@ export default function AddProductform({ onCLose }: { onCLose: () => void }) {
   const { Addproduct } = Productstore((state) => state);
   const [fileList, setFileList] = useState<any[]>([]);
   const queryClient = useQueryClient();
+  const [form] = Form.useForm();
 
   const { mutate, isPending, status } = useMutation({
     mutationKey: ["addProduct"],
@@ -53,6 +53,7 @@ export default function AddProductform({ onCLose }: { onCLose: () => void }) {
       if (data?.success) {
         toast.success("محصول با موفقیت اضافه شد");
         onCLose();
+        form.resetFields();
       } else {
         toast.error("خطابعد ازبررسی دوباره تلاش کنید");
       }
@@ -134,6 +135,7 @@ export default function AddProductform({ onCLose }: { onCLose: () => void }) {
     <section style={styles.section}>
       <div style={styles.container}>
         <Form
+          form={form}
           name="normal_login"
           initialValues={{
             remember: true,
@@ -226,7 +228,7 @@ export default function AddProductform({ onCLose }: { onCLose: () => void }) {
                 message: " قیمت را وارد کنید",
               },
             ]}>
-            <Input prefix={<DollarOutlined />} placeholder="قیمت فروش" />
+            <Input prefix={<DollarOutlined />} placeholder="قیمت تخفیف خورده" />
           </Form.Item>
 
           <Form.Item

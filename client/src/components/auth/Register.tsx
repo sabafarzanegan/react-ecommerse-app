@@ -4,7 +4,7 @@ import { Button, Form, Grid, Input, theme, Typography } from "antd";
 import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { Authstore } from "../../store/Authstore";
+import { Authstore } from "../../store/admin/Authstore";
 import { toast } from "react-toastify";
 
 const { useToken } = theme;

@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import AuthLayout from "./components/auth/Layout";
 import Register from "./page/auth/Register";
@@ -11,22 +10,32 @@ import Adminfeatuers from "./page/Admin/Adminfeatuers";
 import Shoplayout from "./components/shop/Shoplayout";
 import Shoppinghome from "./page/shop/Shoppinghome";
 import Listing from "./page/shop/Listing";
-// import Checkout from "./page/shop/Checkout";
+import Checkout from "./page/shop/Checkout";
 import Notfound from "./page/Notfound/Notfound";
 import Notauth from "./page/Notfound/Notauth";
-
 import AuthProvider from "./components/provider/AuthProvider";
-
-import { Authstore } from "./store/Authstore";
+import { Authstore } from "./store/admin/Authstore";
 import { Flex, Spin } from "antd";
 import { useEffect } from "react";
+import Account from "./page/shop/Account";
+import ProductDetail from "./page/shop/ProductDetail";
+import { useQuery } from "@tanstack/react-query";
 
 function App() {
-  const { user, isLoading, initializeAuth } = Authstore();
+  const { isLoading, initializeAuth } = Authstore();
+  const { user } = Authstore((state) => state);
+  const { fetchToCart, Cart } = ShopCart((state) => state);
+  const userId = user?.id;
+  useQuery({
+    queryKey: ["cart", userId],
+    queryFn: () => fetchToCart(userId),
+  });
+  console.log(Cart);
+
   useEffect(() => {
     initializeAuth();
   }, [initializeAuth]);
-  console.log(user);
+
   if (isLoading) {
     return (
       <Flex align="center" gap="middle">
@@ -38,7 +47,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="container">
       <Routes>
         <Route path="/" element={<AuthProvider></AuthProvider>} />
         <Route
@@ -72,7 +81,9 @@ function App() {
           }>
           <Route path="shoppinghome" element={<Shoppinghome />} />
           <Route path="listing" element={<Listing />} />
-          {/* <Route path="checkout" element={<Checkout />} /> */}
+          <Route path="listing/:productId" element={<ProductDetail />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="account" element={<Account />} />
         </Route>
         <Route path="/not-auth" element={<Notauth />} />
         <Route path="*" element={<Notfound />} />
@@ -80,5 +91,6 @@ function App() {
     </div>
   );
 }
+import { ShopCart } from "./store/user/ShopCart";
 
 export default App;

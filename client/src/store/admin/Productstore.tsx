@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { NewProduct, Product } from "../utils/Type";
-import { axiosInstance } from "../utils/axios";
+import { NewProduct, Product } from "../../utils/Type";
+import { axiosInstance } from "../../utils/axios";
 
 export interface MutationVariables {
   values: NewProduct;

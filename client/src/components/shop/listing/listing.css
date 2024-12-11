@@ -1,0 +1,41 @@
+.listing-container {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+}
+
+.header-listing {
+  border-bottom: 1px solid rgb(231, 231, 231);
+  padding: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkbox-container {
+  display: flex;
+  overflow: hidden;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px 0px;
+}
+.content-section {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+.filter-checkbox {
+  border-left: 1px solid rgb(219, 219, 219);
+  padding-left: 40px;
+}
+.loader-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

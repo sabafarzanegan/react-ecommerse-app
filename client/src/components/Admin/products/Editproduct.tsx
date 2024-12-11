@@ -1,4 +1,3 @@
-import React from "react";
 import { Button, Form, Grid, Input, Select, theme, Upload } from "antd";
 import {
   DollarOutlined,
@@ -6,7 +5,10 @@ import {
   UploadOutlined,
 } from "@ant-design/icons";
 import { useState } from "react";
-import { MutationVariables, Productstore } from "../../../store/Productstore";
+import {
+  MutationVariables,
+  Productstore,
+} from "../../../store/admin/Productstore";
 import { UploadImageInSupabase } from "../../../utils/supabase";
 
 import { Product } from "../../../utils/Type";
@@ -199,7 +201,7 @@ export default function Editproduct({
           </Form.Item>
 
           <Form.Item name="salePrice">
-            <Input prefix={<DollarOutlined />} placeholder="قیمت فروش" />
+            <Input prefix={<DollarOutlined />} placeholder="قیمت تخفیف خورده" />
           </Form.Item>
 
           <Form.Item name="totalStock">

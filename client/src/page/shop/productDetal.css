@@ -1,0 +1,17 @@
+.content-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0px 20px;
+}
+.discount-container {
+  display: flex;
+  align-items: center;
+  gap: 0px 7px;
+}
+
+p {
+  font-weight: 600;
+  font-size: 20px;
+}

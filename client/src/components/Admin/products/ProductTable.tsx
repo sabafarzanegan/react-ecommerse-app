@@ -1,8 +1,7 @@
-import React from "react";
 import { Table, Button, Space, Drawer } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Productstore } from "../../../store/Productstore";
+import { Productstore } from "../../../store/admin/Productstore";
 import { Product } from "../../../utils/Type";
 import { useState } from "react";
 import Editproduct from "./Editproduct";
@@ -31,7 +30,12 @@ function ProductTable() {
       dataIndex: "image",
       key: "image",
       render: (text: string) => (
-        <img src={text} alt="product" style={{ width: "60px" }} />
+        <img
+          loading="lazy"
+          src={text}
+          alt="product"
+          style={{ width: "60px" }}
+        />
       ),
     },
     {
@@ -48,7 +52,13 @@ function ProductTable() {
       title: "قیمت",
       dataIndex: "price",
       key: "price",
-      render: (text: number) => `${text} تومان`,
+      render: (text: number) => `${text.toLocaleString("fa-IR")} تومان`,
+    },
+    {
+      title: "مقدار تخفیف",
+      dataIndex: "salePrice",
+      key: "salePrice",
+      render: (text: number) => `${text.toLocaleString("fa-IR")} تومان`,
     },
     {
       title: "عملیات",
@@ -93,6 +103,8 @@ function ProductTable() {
         rowKey={(record) => record._id}
         loading={isLoading}
         pagination={{
+          style: {},
+
           pageSize: 5,
           showSizeChanger: false,
         }}
