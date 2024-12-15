@@ -7,7 +7,6 @@ import { Authstore } from "../../../store/admin/Authstore";
 
 function Menu() {
   const [open, setOpen] = useState(false);
-  const { user } = Authstore((state) => state);
 
   const showDrawer = () => {
     setOpen(true);
@@ -16,10 +15,10 @@ function Menu() {
   const onClose = () => {
     setOpen(false);
   };
-  const onClick: MenuProps["onClick"] = ({ key }) => {};
+  const onClick: MenuProps["onClick"] = ({}) => {};
   const items: MenuProps["items"] = [
     {
-      label: <Link to="/shop/account">{user?.email}</Link>,
+      label: <Link to="/shop/account">حساب کاربری</Link>,
       key: "1",
     },
     {

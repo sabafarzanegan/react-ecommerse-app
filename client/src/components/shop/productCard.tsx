@@ -1,7 +1,7 @@
-import { Badge, Button, Card, Flex } from "antd";
+import { Button, Card, Flex } from "antd";
 import "./shop.css";
 import { Product } from "../../utils/Type";
-import { calculateDiscount, convertToPersianNumber } from "../../utils/helper";
+import { calculateDiscount } from "../../utils/helper";
 
 import ButtonCard from "./cart/ButtonCard";
 
@@ -12,30 +12,44 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <Card
       style={{
-        maxWidth: "300px",
+        maxWidth: "270px",
+
         margin: "0px auto",
-        maxHeight: "600px",
-        height: "100%",
         width: "100%",
+        height: "500px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        overflow: "hidden",
       }}
       cover={
         <Link to={`/shop/listing/${product._id}`}>
-          <img style={{ height: "100%" }} alt="example" src={product.image} />
+          <img
+            loading="lazy"
+            style={{ maxHeight: "300px", height: "100%", width: "100%" }}
+            alt="example"
+            src={product.image}
+          />
         </Link>
       }>
-      <Flex align="center" justify="space-between">
+      <h4 style={{ WebkitLineClamp: 2, textAlign: "right" }}>
+        {product.title}
+      </h4>
+      {/* <Flex
+        align="center"
+        justify="space-between"
+        style={{ marginTop: "30px" }}>
         <Badge.Ribbon
-          style={{ position: "absolute", top: "-200px", left: "-20px" }}
+          // style={{ position: "absolute", top: "-200px", left: "-60px" }}
           text={product.brand}
           color="pink"
         />
         <Badge.Ribbon
-          style={{ position: "absolute", top: "-200px", left: "-20px" }}
+          // style={{ position: "absolute", top: "-200px", left: "-60px" }}
           text={product.category}
           color="pink"
         />
-      </Flex>
-      <h4 style={{ WebkitLineClamp: 2 }}>{product.title}</h4>
+      </Flex> */}
       <Flex
         style={{ margin: "5px 0px" }}
         align="center"

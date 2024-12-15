@@ -23,3 +23,25 @@ export interface Product {
   totalStock: number;
   category: string;
 }
+
+export type Address = {
+  userId: string | undefined;
+  address: string;
+  city: string;
+  pincode: string | undefined;
+  notes: string;
+  phone: string;
+};
+
+export type getAddress = {
+  address: string;
+  city: string;
+  createdAt: string;
+  notes: string;
+  phone: string;
+  pincode: string;
+  updatedAt: string;
+  userId: string;
+  __v: number;
+  _id: string;
+};

@@ -2,17 +2,14 @@ import { UserOutlined } from "@ant-design/icons";
 
 import { Avatar, Button, Dropdown, MenuProps, Space } from "antd";
 
-import { Authstore } from "../../../store/admin/Authstore";
 import { Link } from "react-router-dom";
 
-const onClick: MenuProps["onClick"] = ({ key }) => {};
+const onClick: MenuProps["onClick"] = ({}) => {};
 
 function Dropdownuser() {
-  const { user } = Authstore((state) => state);
-
   const items: MenuProps["items"] = [
     {
-      label: <Link to="/shop/account">{user?.email}</Link>,
+      label: <Link to="/shop/account">حساب کاربری</Link>,
       key: "1",
     },
     {

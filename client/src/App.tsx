@@ -19,18 +19,9 @@ import { Flex, Spin } from "antd";
 import { useEffect } from "react";
 import Account from "./page/shop/Account";
 import ProductDetail from "./page/shop/ProductDetail";
-import { useQuery } from "@tanstack/react-query";
 
 function App() {
   const { isLoading, initializeAuth } = Authstore();
-  const { user } = Authstore((state) => state);
-  const { fetchToCart, Cart } = ShopCart((state) => state);
-  const userId = user?.id;
-  useQuery({
-    queryKey: ["cart", userId],
-    queryFn: () => fetchToCart(userId),
-  });
-  console.log(Cart);
 
   useEffect(() => {
     initializeAuth();
@@ -91,6 +82,5 @@ function App() {
     </div>
   );
 }
-import { ShopCart } from "./store/user/ShopCart";
 
 export default App;

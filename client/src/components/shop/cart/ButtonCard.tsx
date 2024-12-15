@@ -2,20 +2,40 @@ import { Button } from "antd";
 import { Product } from "../../../utils/Type";
 import { ShopCart } from "../../../store/user/ShopCart";
 import { Authstore } from "../../../store/admin/Authstore";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
 interface Props {
   product: Product | undefined;
 }
 function ButtonCard({ product }: Props) {
-  const { addToCart, updateCart, isLoading, Cart } = ShopCart((state) => state);
+  const { addToCart, updateCart, isLoading, fetchToCart } = ShopCart(
+    (state) => state
+  );
+  const { user } = Authstore((state) => state);
+  const queryClient = useQueryClient();
+  const { data: Cart } = useQuery({
+    queryKey: ["cart"],
+    queryFn: () => fetchToCart(user?.id),
+  });
   const isProductLoading = product
     ? isLoading[product._id] || false
     : undefined;
-  const { user } = Authstore((state) => state);
-  const findProduct = Cart.find(
-    (product1) => product1.productId === product?._id
-  );
-  console.log(findProduct);
-
+  const findProduct =
+    Cart && Cart?.find((product1) => product1.productId === product?._id);
+  const { mutate } = useMutation({
+    mutationKey: ["addcart"],
+    mutationFn: addToCart,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["cart"]);
+    },
+  });
+  const { mutate: updateMutate } = useMutation({
+    mutationKey: ["updatecart"],
+    mutationFn: updateCart,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["cart"]);
+    },
+  });
   return (
     <div
       style={{
@@ -32,7 +52,7 @@ function ButtonCard({ product }: Props) {
             fontWeight: 500,
           }}
           onClick={() =>
-            updateCart({
+            updateMutate({
               userId: user?.id,
               productId: product?._id,
               quantity: findProduct?.quantity ? findProduct.quantity + 1 : 1,
@@ -45,7 +65,7 @@ function ButtonCard({ product }: Props) {
 
       <Button
         onClick={() => {
-          addToCart({
+          mutate({
             userId: user?.id,
             productId: product?._id,
             quantity: findProduct?.quantity ? findProduct.quantity + 1 : 1,
@@ -62,7 +82,7 @@ function ButtonCard({ product }: Props) {
         <Button
           style={{ fontWeight: 500 }}
           onClick={() =>
-            updateCart({
+            updateMutate({
               userId: user?.id,
               productId: product?._id,
               quantity: findProduct?.quantity ? findProduct.quantity - 1 : 0,

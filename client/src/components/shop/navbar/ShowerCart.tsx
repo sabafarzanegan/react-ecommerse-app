@@ -3,12 +3,17 @@ import { Button, Drawer } from "antd";
 import { useState } from "react";
 import { ShopCart } from "../../../store/user/ShopCart";
 
-import { convertToPersianNumber } from "../../../utils/helper";
 import CartTable from "../../../page/shop/CartTable";
+import { useQuery } from "@tanstack/react-query";
+import { Authstore } from "../../../store/admin/Authstore";
 
 function ShowerCart() {
-  const { Cart } = ShopCart((state) => state);
-
+  const { fetchToCart } = ShopCart((state) => state);
+  const { user } = Authstore((state) => state);
+  const { data: cart } = useQuery({
+    queryKey: ["cart"],
+    queryFn: () => fetchToCart(user?.id),
+  });
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
@@ -37,7 +42,7 @@ function ShowerCart() {
             color: "white",
             backgroundColor: "purple",
           }}>
-          {convertToPersianNumber(Cart.length)}
+          {cart?.length.toLocaleString("fa-IR")}
         </span>
         <ShoppingCartOutlined />
       </Button>
@@ -47,7 +52,7 @@ function ShowerCart() {
         closable={false}
         onClose={onClose}
         open={open}>
-        <CartTable data={Cart} />
+        <CartTable data={cart} />
       </Drawer>
     </div>
   );

@@ -15,6 +15,7 @@
 }
 :root {
   --primary-color: #531dab;
+  --secoundry-color: rgb(209, 209, 209);
 }
 body {
   font-family: "vazir", sans-serif !important;
@@ -30,7 +31,7 @@ body {
 .container {
   width: 100%;
   overflow: hidden;
-  padding: 0px 12rem;
+  padding: 0px 2rem;
 }
 @media screen and (min-width: 150px) and (max-width: 1080px) {
   .container {
@@ -146,6 +147,7 @@ p {
 
 ::-webkit-scrollbar {
   width: 6px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -159,4 +161,10 @@ p {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #391085;
+}
+.slick-arrow {
+  color: #311ebf;
+}
+.ant-dropdown {
+  width: 150px;
 }

@@ -1,6 +1,8 @@
 import { Table } from "antd";
-import { Cart } from "../../store/user/ShopCart";
+import { Cart, ShopCart } from "../../store/user/ShopCart";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Authstore } from "../../store/admin/Authstore";
 
 const columns = [
   {
@@ -45,18 +47,38 @@ const columns = [
   },
 ];
 
-function CartTable({ data }: { data: Cart[] }) {
+function CartTable() {
+  const { fetchToCart } = ShopCart((state) => state);
+  const { user } = Authstore((state) => state);
+  const { data: cart } = useQuery({
+    queryKey: ["cart"],
+    queryFn: () => fetchToCart(user?.id),
+  });
+  const totalAmoutnt =
+    cart?.reduce((sum, item) => {
+      const price = item?.salePrice > 0 ? item?.salePrice : item?.price || 0;
+      const quantity = item?.quantity || 0;
+      return sum + price * quantity;
+    }, 0) || 0;
   return (
-    <Table
-      columns={columns}
-      dataSource={data}
-      rowKey={(record) => record.productId}
-      pagination={{
-        style: {},
-        pageSize: 5,
-        showSizeChanger: false,
-      }}
-    />
+    <>
+      <Table
+        columns={columns}
+        dataSource={cart}
+        rowKey={(record) => record.productId}
+        pagination={{
+          style: {},
+          pageSize: 5,
+          showSizeChanger: false,
+        }}
+      />
+      <p>
+        قیمت کل محصولات:
+        <span style={{ padding: "0px 5px" }}>
+          {totalAmoutnt.toLocaleString("fa-IR")}تومان
+        </span>
+      </p>
+    </>
   );
 }
 

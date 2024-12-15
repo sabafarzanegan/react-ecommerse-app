@@ -1,4 +1,3 @@
-import React from "react";
 import { Button, Form, Grid, Input, theme, Typography } from "antd";
 
 import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";

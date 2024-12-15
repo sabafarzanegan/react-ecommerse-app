@@ -4,7 +4,7 @@ import { Shopstore } from "../../store/user/Shopstore";
 import "./productDetal.css";
 import { Breadcrumb, Button, Spin } from "antd";
 import ButtonCard from "../../components/shop/cart/ButtonCard";
-import { gray } from "@ant-design/colors";
+
 import { calculateDiscount, convertToPersianNumber } from "../../utils/helper";
 function ProductDetail() {
   const { productId } = useParams();

@@ -19,7 +19,7 @@ type Productstore = {
   }: MutationVariables) => Promise<{ success: boolean } | undefined>;
 };
 
-export const Productstore = create<Productstore>((set) => ({
+export const Productstore = create<Productstore>(() => ({
   Addproduct: async (formData) => {
     try {
       const res = await axiosInstance.post("/admin/products/add", formData, {
